@@ -1,0 +1,163 @@
+{
+  "generator": "Code Snippets v2.14.0",
+  "date_created": "2020-10-31 13:01",
+  "snippets": [
+    {
+      "name": "Order snippets by name",
+      "desc": "Order snippets by name by default in the snippets table.",
+      "tags": [
+        "code-snippets-plugin"
+      ],
+      "scope": "admin",
+      "code": "add_filter( 'code_snippets/list_table/default_orderby', function () {\n\treturn 'name';\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Order snippets by date",
+      "desc": "Order snippets by last modification date by default in the snippets table.",
+      "tags": [
+        "code-snippets-plugin"
+      ],
+      "scope": "admin",
+      "code": "add_filter( 'code_snippets/list_table/default_orderby', function () {\n\treturn 'modified';\n} );\n\nadd_filter( 'code_snippets/list_table/default_order', function () {\n\treturn 'desc';\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Set logo URL of login page",
+      "desc": "Customize the link URL of the header logo above login form.",
+      "tags": [
+        "login",
+        "style"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'login_headerurl', function () {\n\t return get_bloginfo( 'url' );\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Set link text of login page",
+      "desc": "Customize the link text of the header logo above the login form.",
+      "tags": [
+        "login",
+        "style"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'login_headertext', function () {\n\t return get_bloginfo( 'description' );\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Change address fields for WooCommerce",
+      "desc": "Customize WooCommerce checkout address fields.",
+      "tags": [
+        "woocommerce"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'woocommerce_default_address_fields', function ( $fields ) {\n\t$fields['state']['required'] = false;\n\tunset( $fields['address_2'] );\n\treturn $fields;\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Change styles of login page",
+      "desc": "Customize style and the image URL of the header logo above login form.",
+      "tags": [
+        "login",
+        "style"
+      ],
+      "scope": "global",
+      "code": "add_action( 'login_enqueue_scripts', function () {\n\t$logo = get_theme_mod( 'custom_logo' );\n\t$image = wp_get_attachment_image_src( $logo , 'full' );\n\t$image_url = $image[0];\n\t$image_width = $image[1];\n\t$image_height = $image[2];\n?>\n<style>\n\t#login { \n\t\tpadding: 20px !important;\n\t}\n\t#login h1 a, .login h1 a {\n\t\tbackground-image: url(<?php echo $image_url; ?>);\n\t\tbackground-position: center bottom;\n\t\tbackground-size: auto;\n\t}\n\t#login_error, .login form, .login .message {\n\t\tborder-radius: 10px;\n\t}\n</style>\n<?php } );",
+      "priority": "10"
+    },
+    {
+      "name": "Disable image compression",
+      "desc": "WordPress automatically compresses images to 80-90% of their original size, this snippet stops automatically compressing image, because tell it to load images at 100% quality. (Another alternative to compress images without loss of quality is the following plugin: https://wordpress.org/plugins/wp-smushit/)",
+      "tags": [
+        "media"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'jpeg_quality', function( $arg ) {\n    return 100;\n} );\n\nadd_filter( 'wp_editor_set_quality', function( $arg ) {\n\treturn 100;\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Remove generator tags",
+      "desc": "Hide version number by removing generator meta tags.",
+      "tags": [
+        "security"
+      ],
+      "scope": "global",
+      "code": "remove_action( 'wp_head', 'wp_generator' );\nremove_action( 'wp_head', 'wc_generator' );",
+      "priority": "10"
+    },
+    {
+      "name": "Stop the Heartbeat API",
+      "desc": "The main consequences of disabling Heartbeat API:\n<ul>\n \t<li>(1) Auto save and revisions will not work.</li>\n \t<li>(2) Not be able to see real-time statistics and information if any of your installed plugin uses heartbeat API.</li>\n</ul>",
+      "tags": [
+        "performance"
+      ],
+      "scope": "front-end",
+      "code": "add_action( 'init', function() {\n\twp_deregister_script('heartbeat');\n} );",
+      "priority": "1"
+    },
+    {
+      "name": "Turn off Google Fonts in Elementor designs",
+      "desc": "Reduces HTTP requests by turning off Google Font and speeds up the page.",
+      "tags": [
+        "performance",
+        "style"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );",
+      "priority": "10"
+    },
+    {
+      "name": "Turn off Font Awesome",
+      "desc": "Reduces HTTP requests by turning off Font Awesome and speeds up the page.",
+      "tags": [
+        "performance",
+        "style",
+        "elementor"
+      ],
+      "scope": "global",
+      "code": "add_action( 'wp_enqueue_scripts', function() {\n\twp_dequeue_style( 'font-awesome' );\n}, 50 );",
+      "priority": "50"
+    },
+    {
+      "name": "Change the Heartbeat API settings",
+      "desc": "By default the WordPress heart beats once every 15 seconds. You can lower that rate to anything down to one beat every minute. This lessens the load on your server while still giving you the benefits of the Heartbeat API.\n\nHeartbeat starts running automatically when the page loads, you can turn auto-start off from the default Heartbeat settings.",
+      "tags": [
+        "performance"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'heartbeat_settings', function( $settings ) {\n\t$settings['interval'] = 60; //Anything between 15-120 seconds\n\t$settings['autostart'] = false;\n    return $settings;\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Set all of WordPress generated image sizes",
+      "desc": "WordPress creates the following extra images for every image that is uploaded via the Media Library or Visual Editors:\n<ul>\n \t<li>Thumbnail size (Size based on Media settings)</li>\n \t<li>Medium size (Size based on Media settings)</li>\n \t<li>Large size (Size based on Media settings)</li>\n \t<li>Medium Large size (768px)</li>\n \t<li>2x Medium Large size (1536px)</li>\n \t<li>2x Large size (2028px)</li>\n \t<li>Scaled size (Default threshold: 2560px) - This scaled image will be used as <strong>the largest available size</strong>. If WordPress has generated the scaled image then it will use it and still keep the original image but it won’t be used and takes unnecessary disk space.</li>\n</ul>\nDepending on your theme, even more additional image sizes may be created via the following WordPress core functions:\n<ul>\n \t<li>Creates a custom size for featured images - <em>set_post_thumbnail_size()</em></li>\n \t<li>Creates extra images of any specified size(s) - <em>add_image_size()</em></li>\n</ul>",
+      "tags": [
+        "media",
+        "performance"
+      ],
+      "scope": "global",
+      "code": "add_action( 'intermediate_image_sizes_advanced', function( $sizes ) {\n\t\n\t/* Default WordPress */\n\tunset( $sizes[ 'thumbnail' ]);\n\tunset( $sizes[ 'medium' ] );\n\tunset( $sizes[ 'large' ]);\n\tunset( $sizes[ 'medium_large' ]);\n\tunset( $sizes[ '1536x1536' ]);\n\tunset( $sizes[ '2048x2048' ]);\n\t\n\t/* WooCommerce */\n\t// unset( $sizes[ 'shop_thumbnail' ]);\n\t// unset( $sizes[ 'shop_catalog' ]);\n\tunset( $sizes[ 'shop_single' ]);\n\tunset( $sizes[ 'woocommerce_gallery_thumbnail' ]);\n\tunset( $sizes[ 'woocommerce_thumbnail' ]);\n\tunset( $sizes[ 'woocommerce_single' ]);\n\t\n\treturn $sizes;\n} );\n\n/* Scaled: Change the largest available image size instead of disabling (default threshold: 2560px) */\nadd_filter( 'big_image_size_threshold', function() {\n\treturn 1920;\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Apply Custom CSS to Admin Area",
+      "desc": "Overwrite and apply custom CSS to the Wordpress admin area.",
+      "tags": [
+        "style"
+      ],
+      "scope": "admin",
+      "code": "add_action( 'admin_head', function() {\n  echo '<style>\n\t.wp-list-table.fixed .column-icl_translations {\n    \twidth: auto;\n\t}\n\t@media (max-width: 1440px) and (min-width: 768px) {\n\t\t.fixed .column-shortcode {\n\t\t\twidth: 22%;\n\t\t}\n\t}\n  </style>';\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Disable Dashboard Widgets",
+      "desc": "Customizing the WordPress Dashboard, remove unwanted widgets and clean up the default WP Dashboard.",
+      "tags": [
+        "clean"
+      ],
+      "scope": "admin",
+      "code": "add_action('wp_dashboard_setup', function() {\n\tglobal $wp_meta_boxes;\n\tunset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);                     // Activity\n\tunset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);                        // WordPress Events and News\n\tunset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);                    // Quick Draft\n\tunset($wp_meta_boxes['dashboard']['normal']['core']['e-dashboard-overview']);                   // Elementor Overview\n\tunset($wp_meta_boxes['dashboard']['normal']['core']['woocommerce_dashboard_recent_reviews']);   // Woocommerce Recent Reviews\n}, 999 );",
+      "priority": "10"
+    }
+  ]
+}
