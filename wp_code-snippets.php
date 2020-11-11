@@ -47,14 +47,14 @@ add_filter( 'login_headertext', function () {
  */
 add_filter( 'woocommerce_default_address_fields', function ( $fields ) {
 	$fields['state']['required'] = false;
-	unset( $fields['address_2'] );
+	unset( $fields['address_2'] ); // Remove this field
 	return $fields;
 } );
 
-add_filter( 'woocommerce_billing_fields', function ( $fields ) {
-	$fields['billing_phone']['required'] = false;
-	return $fields;
-} );
+// add_filter( 'woocommerce_billing_fields', function ( $fields ) {
+// 	 $fields['billing_phone']['required'] = false;
+//	 return $fields;
+// } );
 
 /**
  * Change styles of login page
@@ -268,3 +268,14 @@ if(!is_admin() && (!function_exists('get_blog_status') || function_exists('get_c
   }
 });
 
+
+/**
+ * Turn off Auto Update
+ *
+ * WordPress has automatic background updates (since version 3.7). If this snippet is active, auto-update will be disabled.
+ */
+// add_filter( 'automatic_updater_disabled', '__return_true' );
+add_filter( 'auto_update_core', '__return_false' );
+add_filter( 'auto_update_plugin', '__return_false' );
+add_filter( 'auto_update_theme', '__return_false' );
+add_filter( 'auto_update_translation', '__return_false' );

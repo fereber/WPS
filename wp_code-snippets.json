@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2020-11-03 12:10",
+  "date_created": "2020-11-11 14:34",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -51,7 +51,7 @@
         "woocommerce"
       ],
       "scope": "global",
-      "code": "add_filter( 'woocommerce_default_address_fields', function ( $fields ) {\n\t$fields['state']['required'] = false;\n\tunset( $fields['address_2'] );\n\treturn $fields;\n} );\n\nadd_filter( 'woocommerce_billing_fields', function ( $fields ) {\n\t$fields['billing_phone']['required'] = false;\n\treturn $fields;\n} );",
+      "code": "add_filter( 'woocommerce_default_address_fields', function ( $fields ) {\n\t$fields['state']['required'] = false;\n\tunset( $fields['address_2'] ); // Remove this field\n\treturn $fields;\n} );\n\n// add_filter( 'woocommerce_billing_fields', function ( $fields ) {\n// \t $fields['billing_phone']['required'] = false;\n//\t return $fields;\n// } );",
       "priority": "10"
     },
     {
@@ -168,6 +168,13 @@
       ],
       "scope": "global",
       "code": "$network_plugins = apply_filters('active_plugins', get_site_option('active_sitewide_plugins'));\n$subsite_plugins = apply_filters('active_plugins', get_option('active_plugins'));\n\nif(!is_admin() && (!function_exists('get_blog_status') || function_exists('get_current_blog_id') && empty(get_blog_status(get_current_blog_id(), 'deleted'))) && ((!empty($subsite_plugins) && in_array('woocommerce/woocommerce.php', $subsite_plugins)) || (!empty($network_plugins) && array_key_exists('woocommerce/woocommerce.php', $network_plugins)))) add_action('init', function() {\n  $myaccount = wc_get_page_permalink('myaccount');\n  global $pagenow;\n  if(home_url() != $myaccount) {\n    $action_array = array_unique(array_merge(((array) apply_filters('woo_wp_login_actions', array())), array(\"logout\", \"rp\", \"resetpass\", \"resetpassword\", \"enter_recovery_mode\")));\n    if('wp-login.php' == $pagenow && (!isset($_GET['action']) || !in_array($_GET['action'], $action_array)) && !isset($_REQUEST['interim-login'])) {\n      if(!empty($_GET['action']) && $_GET['action'] == \"lostpassword\") {\n        unset($_GET['action']);\n        wp_redirect($myaccount . strtok(wc_get_endpoint_url('lost-password'), '/') . ((http_build_query($_GET)) ? '?' . http_build_query($_GET) : \"\" ));\n        exit();\n      }  else {\n        $woo_wp_redirect = ((isset($_GET['redirect_to'])) ? 'redirect-to=' . strtok($_GET['redirect_to'], '?') : \"\" );\n        unset($_GET['redirect_to'],$_GET['loggedout'],$_GET['reauth']);\n        $woo_wp_combined_query = (($woo_wp_redirect) ? $woo_wp_redirect : \"\" ) . ((http_build_query($_GET)) ? (($woo_wp_redirect) ? '&' : \"\" ) . http_build_query($_GET) : \"\" );\n        wp_redirect($myaccount . (($woo_wp_combined_query) ? '?' . $woo_wp_combined_query : \"\" ));\n        exit();\n      }\n    }\n    if(isset($_GET['redirect-to'])) {\n      if((isset($_SERVER['HTTPS']) ? \"https\" : \"http\") . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') == $myaccount && is_user_logged_in() ) {\n        $myaccount_redirect = $_GET['redirect-to'];\n        unset($_GET['redirect-to'],$_GET['reauth']);\n        wp_redirect($myaccount_redirect . ((http_build_query($_GET)) ? '?' . http_build_query($_GET) : \"\" ));\n        exit();\n      } elseif((isset($_SERVER['HTTPS']) ? \"https\" : \"http\") . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') != $myaccount) {\n        unset($_GET['redirect-to'],$_GET['reauth']);\n        wp_redirect((isset($_SERVER['HTTPS']) ? \"https\" : \"http\") . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . ((http_build_query($_GET)) ? '?' . http_build_query($_GET) : \"\" ));\n        exit();\n      }\n    }\n  }\n});\n",
+      "priority": "10"
+    },
+    {
+      "name": "Turn off Auto Update",
+      "desc": "WordPress has automatic background updates (since version 3.7). If this snippet is active, auto-update will be disabled.",
+      "scope": "admin",
+      "code": "// add_filter( 'automatic_updater_disabled', '__return_true' );\nadd_filter( 'auto_update_core', '__return_false' );\nadd_filter( 'auto_update_plugin', '__return_false' );\nadd_filter( 'auto_update_theme', '__return_false' );\nadd_filter( 'auto_update_translation', '__return_false' );",
       "priority": "10"
     }
   ]
