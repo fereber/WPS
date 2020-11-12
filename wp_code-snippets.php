@@ -76,6 +76,7 @@ add_action( 'login_enqueue_scripts', function () {
 		background-image: url(<?php echo $image_url; ?>);
 		background-position: center bottom;
 		background-size: auto;
+		width: auto;
 	}
 	#login_error, .login form, .login .message {
 		border-radius: 10px;

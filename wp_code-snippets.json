@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2020-11-11 14:34",
+  "date_created": "2020-11-12 16:39",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -62,7 +62,7 @@
         "style"
       ],
       "scope": "global",
-      "code": "add_action( 'login_enqueue_scripts', function () {\n\t$logo = get_theme_mod( 'custom_logo' );\n\t$image = wp_get_attachment_image_src( $logo , 'full' );\n\t$image_url = $image[0];\n\t$image_width = $image[1];\n\t$image_height = $image[2];\n?>\n<style>\n\t#login { \n\t\tpadding: 20px !important;\n\t}\n\t#login h1 a, .login h1 a {\n\t\tbackground-image: url(<?php echo $image_url; ?>);\n\t\tbackground-position: center bottom;\n\t\tbackground-size: auto;\n\t}\n\t#login_error, .login form, .login .message {\n\t\tborder-radius: 10px;\n\t}\n</style>\n<?php } );",
+      "code": "add_action( 'login_enqueue_scripts', function () {\n\t$logo = get_theme_mod( 'custom_logo' );\n\t$image = wp_get_attachment_image_src( $logo , 'full' );\n\t$image_url = $image[0];\n\t$image_width = $image[1];\n\t$image_height = $image[2];\n?>\n<style>\n\t#login { \n\t\tpadding: 20px !important;\n\t}\n\t#login h1 a, .login h1 a {\n\t\tbackground-image: url(<?php echo $image_url; ?>);\n\t\tbackground-position: center bottom;\n\t\tbackground-size: auto;\n\t\twidth: auto;\n\t}\n\t#login_error, .login form, .login .message {\n\t\tborder-radius: 10px;\n\t}\n</style>\n<?php } );",
       "priority": "10"
     },
     {
