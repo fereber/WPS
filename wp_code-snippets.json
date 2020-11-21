@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2020-11-12 16:39",
+  "date_created": "2020-11-21 13:41",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -175,6 +175,26 @@
       "desc": "WordPress has automatic background updates (since version 3.7). If this snippet is active, auto-update will be disabled.",
       "scope": "admin",
       "code": "// add_filter( 'automatic_updater_disabled', '__return_true' );\nadd_filter( 'auto_update_core', '__return_false' );\nadd_filter( 'auto_update_plugin', '__return_false' );\nadd_filter( 'auto_update_theme', '__return_false' );\nadd_filter( 'auto_update_translation', '__return_false' );",
+      "priority": "10"
+    },
+    {
+      "name": "Configure Default Media Gallery Settings",
+      "desc": "This snippet changes the default attributes for the gallery to be link=\"file\", columns=\"2\" and size=\"medium\".",
+      "tags": [
+        "media"
+      ],
+      "scope": "global",
+      "code": "add_filter( 'media_view_settings', function( $settings ) {\n\t$settings['galleryDefaults']['link'] = 'file';\n\t$settings['galleryDefaults']['size'] = 'medium';\n\t$settings['galleryDefaults']['columns'] = '2';\n\treturn $settings;\n} );",
+      "priority": "10"
+    },
+    {
+      "name": "Set Content Width",
+      "desc": "WordPress relies on a content width setting to control how wide an embedded object should be. Some WordPress themes will have this set already and it will match the width of the content that is being displayed.",
+      "tags": [
+        "style"
+      ],
+      "scope": "front-end",
+      "code": "if ( ! isset( $content_width ) ) {\n\t$content_width = 768;\n}",
       "priority": "10"
     }
   ]

@@ -280,3 +280,24 @@ add_filter( 'auto_update_core', '__return_false' );
 add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 add_filter( 'auto_update_translation', '__return_false' );
+
+/**
+ * Configure Default Media Gallery Settings
+ *
+ * This snippet changes the default attributes for the gallery to be link="file", columns="2" and size="medium".
+ */
+add_filter( 'media_view_settings', function( $settings ) {
+	$settings['galleryDefaults']['link'] = 'file';
+	$settings['galleryDefaults']['size'] = 'medium';
+	$settings['galleryDefaults']['columns'] = '2';
+	return $settings;
+} );
+
+/**
+ * Set Content Width
+ *
+ * WordPress relies on a content width setting to control how wide an embedded object should be. Some WordPress themes will have this set already and it will match the width of the content that is being displayed.
+ */
+if ( ! isset( $content_width ) ) {
+	$content_width = 768;
+}
