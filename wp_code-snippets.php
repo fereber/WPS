@@ -32,7 +32,7 @@ add_filter( 'login_headerurl', function () {
 } );
 
 /**
- * Set link text of login page
+ * Set logo text of login page
  *
  * Customize the link text of the header logo above the login form.
  */
@@ -57,26 +57,22 @@ add_filter( 'woocommerce_default_address_fields', function ( $fields ) {
 // } );
 
 /**
- * Change styles of login page
+ * Set logo image of login page
  *
  * Customize style and the image URL of the header logo above login form.
  */
 add_action( 'login_enqueue_scripts', function () {
-	$logo = get_theme_mod( 'custom_logo' );
-	$image = wp_get_attachment_image_src( $logo , 'full' );
-	$image_url = $image[0];
-	$image_width = $image[1];
-	$image_height = $image[2];
+	$logo_url = get_site_icon_url(180);
 ?>
 <style>
 	#login { 
 		padding: 20px !important;
 	}
 	#login h1 a, .login h1 a {
-		background-image: url(<?php echo $image_url; ?>);
+		background-image: url(<?php echo $logo_url; ?>);
 		background-position: center bottom;
-		background-size: auto;
-		width: auto;
+		background-size: 100%;
+		width: 64px;
 	}
 	#login_error, .login form, .login .message {
 		border-radius: 10px;

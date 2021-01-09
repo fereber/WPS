@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2021-01-06 15:20",
+  "date_created": "2021-01-09 18:04",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -34,7 +34,7 @@
       "priority": "10"
     },
     {
-      "name": "Set link text of login page",
+      "name": "Set logo text of login page",
       "desc": "Customize the link text of the header logo above the login form.",
       "tags": [
         "login",
@@ -55,14 +55,14 @@
       "priority": "10"
     },
     {
-      "name": "Change styles of login page",
+      "name": "Set logo image of login page",
       "desc": "Customize style and the image URL of the header logo above login form.",
       "tags": [
         "login",
         "style"
       ],
       "scope": "global",
-      "code": "add_action( 'login_enqueue_scripts', function () {\n\t$logo = get_theme_mod( 'custom_logo' );\n\t$image = wp_get_attachment_image_src( $logo , 'full' );\n\t$image_url = $image[0];\n\t$image_width = $image[1];\n\t$image_height = $image[2];\n?>\n<style>\n\t#login { \n\t\tpadding: 20px !important;\n\t}\n\t#login h1 a, .login h1 a {\n\t\tbackground-image: url(<?php echo $image_url; ?>);\n\t\tbackground-position: center bottom;\n\t\tbackground-size: auto;\n\t\twidth: auto;\n\t}\n\t#login_error, .login form, .login .message {\n\t\tborder-radius: 10px;\n\t}\n</style>\n<?php } );",
+      "code": "add_action( 'login_enqueue_scripts', function () {\n\t$logo_url = get_site_icon_url(180);\n?>\n<style>\n\t#login { \n\t\tpadding: 20px !important;\n\t}\n\t#login h1 a, .login h1 a {\n\t\tbackground-image: url(<?php echo $logo_url; ?>);\n\t\tbackground-position: center bottom;\n\t\tbackground-size: 100%;\n\t\twidth: 64px;\n\t}\n\t#login_error, .login form, .login .message {\n\t\tborder-radius: 10px;\n\t}\n</style>\n<?php } );",
       "priority": "10"
     },
     {
