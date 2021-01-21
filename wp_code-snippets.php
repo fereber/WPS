@@ -100,6 +100,7 @@ add_filter( 'wp_editor_set_quality', function( $arg ) {
  */
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'wc_generator' );
+add_filter( 'wpseo_hide_version', '__return_true' );
 add_filter( 'wpseo_debug_markers', '__return_false' );
 
 /**

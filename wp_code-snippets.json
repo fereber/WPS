@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2021-01-09 18:04",
+  "date_created": "2021-01-21 10:04",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -82,7 +82,7 @@
         "security"
       ],
       "scope": "global",
-      "code": "remove_action( 'wp_head', 'wp_generator' );\nremove_action( 'wp_head', 'wc_generator' );\nadd_filter( 'wpseo_debug_markers', '__return_false' );",
+      "code": "remove_action( 'wp_head', 'wp_generator' );\nremove_action( 'wp_head', 'wc_generator' );\nadd_filter( 'wpseo_hide_version', '__return_true' );\nadd_filter( 'wpseo_debug_markers', '__return_false' );",
       "priority": "10"
     },
     {
