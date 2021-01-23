@@ -290,3 +290,17 @@ if(!is_admin() && (!function_exists('get_blog_status') || function_exists('get_c
   }
 });
 
+
+/**
+ * Enable Yoast SEO development mode
+ *
+ * Enable Yoast SEO development mode
+ */
+add_filter( 'yoast_seo_development_mode', '__return_true' );
+
+/**
+ * Disable all Yoast SEO's schema output
+ *
+ * If you use your own ld+jsont scheme, enable it to disable the Yoast SEO's schema entirely.
+ */
+add_filter( 'wpseo_json_ld_output', '__return_false' );
