@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2021-01-23 09:18",
+  "date_created": "2021-01-26 17:28",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -217,6 +217,16 @@
       ],
       "scope": "global",
       "code": "add_filter( 'wpseo_json_ld_output', '__return_false' );",
+      "priority": "10"
+    },
+    {
+      "name": "Activating Maintenance Mode",
+      "desc": "Put WordPress into maintenance mode.",
+      "tags": [
+        "development"
+      ],
+      "scope": "global",
+      "code": "add_action('get_header', function() {\n\tglobal $pagenow;\n\tif ( $pagenow !== 'wp-login.php' && ! current_user_can( 'manage_options' ) && ! is_admin() ) {\n\t\twp_die( \n\t\t\t'<h1>We are down for Maintenance</h1><br/>We will be back shortly!',\n\t\t\t'503 Service Temporarily Unavailable',\n\t\t\tarray( 'response' => 503 )\n\t\t);\n\t}\n});",
       "priority": "10"
     }
   ]

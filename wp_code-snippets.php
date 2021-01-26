@@ -304,3 +304,19 @@ add_filter( 'yoast_seo_development_mode', '__return_true' );
  * If you use your own ld+jsont scheme, enable it to disable the Yoast SEO's schema entirely.
  */
 add_filter( 'wpseo_json_ld_output', '__return_false' );
+
+/**
+ * Activating Maintenance Mode
+ *
+ * Put WordPress into maintenance mode.
+ */
+add_action('get_header', function() {
+	global $pagenow;
+	if ( $pagenow !== 'wp-login.php' && ! current_user_can( 'manage_options' ) && ! is_admin() ) {
+		wp_die( 
+			'<h1>We are down for Maintenance</h1><br/>We will be back shortly!',
+			'503 Service Temporarily Unavailable',
+			array( 'response' => 503 )
+		);
+	}
+});
