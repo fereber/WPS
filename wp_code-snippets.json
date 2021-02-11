@@ -1,6 +1,6 @@
 {
   "generator": "Code Snippets v2.14.0",
-  "date_created": "2021-01-26 17:28",
+  "date_created": "2021-02-11 16:44",
   "snippets": [
     {
       "name": "Order snippets by name",
@@ -137,7 +137,7 @@
         "performance"
       ],
       "scope": "global",
-      "code": "add_action( 'intermediate_image_sizes_advanced', function( $sizes ) {\n\t\n\t/* Default WordPress */\n\tunset( $sizes[ 'thumbnail' ]);\n\tunset( $sizes[ 'medium' ] );\n\tunset( $sizes[ 'large' ]);\n\tunset( $sizes[ 'medium_large' ]);\n\tunset( $sizes[ '1536x1536' ]);\n\tunset( $sizes[ '2048x2048' ]);\n\t\n\t/* WooCommerce */\n\tunset( $sizes[ 'shop_thumbnail' ]);\n\tunset( $sizes[ 'shop_catalog' ]);\n\tunset( $sizes[ 'shop_single' ]);\n\tunset( $sizes[ 'woocommerce_gallery_thumbnail' ]);\n\tunset( $sizes[ 'woocommerce_thumbnail' ]);\n\tunset( $sizes[ 'woocommerce_single' ]);\n\t\n\treturn $sizes;\n} );\n\n/* Scaled: Change the largest available image size instead of disabling (default threshold: 2560px) */\nadd_filter( 'big_image_size_threshold', function() {\n\treturn 1920;\n} );",
+      "code": "add_action( 'intermediate_image_sizes_advanced', function( $sizes ) {\n\t\n\t/* Default WordPress */\n\t//unset( $sizes[ 'thumbnail' ]);\n\tunset( $sizes[ 'medium' ] );\n\tunset( $sizes[ 'large' ]);\n\tunset( $sizes[ 'medium_large' ]);\n\tunset( $sizes[ '1536x1536' ]);\n\tunset( $sizes[ '2048x2048' ]);\n\t\n\t/* WooCommerce */\n\tunset( $sizes[ 'shop_thumbnail' ]);\n\tunset( $sizes[ 'shop_catalog' ]);\n\tunset( $sizes[ 'shop_single' ]);\n\tunset( $sizes[ 'woocommerce_gallery_thumbnail' ]);\n\tunset( $sizes[ 'woocommerce_thumbnail' ]);\n\tunset( $sizes[ 'woocommerce_single' ]);\n\t\n\treturn $sizes;\n} );\n\n/* Scaled: Change the largest available image size instead of disabling (default threshold: 2560px) */\nadd_filter( 'big_image_size_threshold', function() {\n\treturn 1920;\n} );",
       "priority": "10"
     },
     {

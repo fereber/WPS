@@ -167,7 +167,7 @@ add_filter( 'heartbeat_settings', function( $settings ) {
 add_action( 'intermediate_image_sizes_advanced', function( $sizes ) {
 	
 	/* Default WordPress */
-	unset( $sizes[ 'thumbnail' ]);
+	//unset( $sizes[ 'thumbnail' ]);
 	unset( $sizes[ 'medium' ] );
 	unset( $sizes[ 'large' ]);
 	unset( $sizes[ 'medium_large' ]);
